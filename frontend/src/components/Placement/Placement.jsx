@@ -30,14 +30,14 @@ function Placement() {
   return (
     <>
       <div className="bg-sky-100 min-h-screen flex flex-col items-center py-6">
-        {/* Header */}
+        
         <div className="bg-sky-300 w-full max-w-6xl text-center py-4 rounded-md mb-6 shadow-lg">
           <h1 className="text-black text-4xl font-bold">Experiences</h1>
         </div>
 
-        {/* Form Section */}
+        
         <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Name Input */}
+          
           <div className="flex flex-col">
             <label className="font-semibold mb-2">Name</label>
             <input
@@ -51,7 +51,7 @@ function Placement() {
             />
           </div>
 
-          {/* Branch Select */}
+         
           <div className="flex flex-col">
             <label className="font-semibold mb-2">Select Branch</label>
             <select
@@ -68,7 +68,7 @@ function Placement() {
             </select>
           </div>
 
-          {/* Company Select */}
+         
           <div className="flex flex-col">
             <label className="font-semibold mb-2">Company</label>
             <select
@@ -85,7 +85,7 @@ function Placement() {
             </select>
           </div>
 
-          {/* Profile Select */}
+          
           <div className="flex flex-col">
             <label className="font-semibold mb-2">Profile</label>
             <select
@@ -102,7 +102,7 @@ function Placement() {
             </select>
           </div>
 
-          {/* Graduation Year */}
+         
           <div className="flex flex-col">
             <label className="font-semibold mb-2">Graduation Year</label>
             <select
@@ -119,7 +119,7 @@ function Placement() {
             </select>
           </div>
 
-          {/* Experience Type */}
+          
           <div className="flex flex-col">
             <label className="font-semibold mb-2">Experience Type</label>
             <select
@@ -137,7 +137,7 @@ function Placement() {
           </div>
         </div>
 
-        {/* Buttons */}
+        
         <div className="flex justify-center mt-6 space-x-4">
           <button className="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700">
             Filter
