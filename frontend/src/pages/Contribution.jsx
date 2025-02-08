@@ -1,226 +1,172 @@
-import React, { useState } from 'react'
-import {useNavigate} from 'react-router-dom'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Contribute = () => {
+  const navigate = useNavigate();
 
-  const navigate=useNavigate();
-
-  const [data,setData] = useState({
-    name:'',
-    company:'',
-    jobTitle:'',
-    resumeScreening:'',
-    round1Name:'',
-    round1:'',
-    round2Name:'',
-    round2:'',
-    round3Name:'',
-    round3:'',
-    round4Name:'',
-    round4:'',
-    round5Name:'',
-    round5:''
+  const [data, setData] = useState({
+    name: '',
+    company: '',
+    jobTitle: '',
+    resumeScreening: '',
+    round1Name: '',
+    round1: '',
+    round2Name: '',
+    round2: '',
+    round3Name: '',
+    round3: '',
+    round4Name: '',
+    round4: '',
+    round5Name: '',
+    round5: '',
   });
 
-  const handleChange=(e)=>{
-    setData({...data,[e.target.name]:e.target.value});
-    console.log({...data,[e.target.name]:e.target.value});
-  }
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+    console.log({ ...data, [e.target.name]: e.target.value });
+  };
 
-  const handleClick=async(e)=>{
+  const handleClick = async (e) => {
     e.preventDefault();
-    const {name,company,jobTitle,resumeScreening,round1Name,round1,round2Name,round2,round3Name,round3,round4Name,round4}=data;
+    const { name, company, jobTitle, resumeScreening, round1Name, round1, round2Name, round2, round3Name, round3, round4Name, round4 } = data;
 
-    const res=await fetch('/contribute',{
-        method:"POST",
-        headers:{
-            "Content-Type":'application/json'
-        },
-        body:JSON.stringify({
-          name,company,jobTitle,resumeScreening,round1Name,round1,round2Name,round2,round3Name,round3,round4Name,round4
-        })
-    })
-    const responseData=await res.json();
-    if(!responseData){
-        window.alert("Invalid submission");
-        console.log("invalid submission");
-    }else{
-        window.alert("Successfull submission");
-        console.log('successfull submission');
-        setData('')
-        navigate('/');
+    const res = await fetch('/contribute', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        company,
+        jobTitle,
+        resumeScreening,
+        round1Name,
+        round1,
+        round2Name,
+        round2,
+        round3Name,
+        round3,
+        round4Name,
+        round4,
+      }),
+    });
+    const responseData = await res.json();
+    if (!responseData) {
+      window.alert('Invalid submission');
+      console.log('Invalid submission');
+    } else {
+      window.alert('Successful submission');
+      console.log('Successful submission');
+      setData('');
+      navigate('/');
     }
-}
+  };
 
   return (
+    
+    <div className="min-h-screen flex items-center justify-center relative">
+ 
+    <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#666_40%,#63e_100%)]"></div>
 
 
-<section class=" py-1 bg-blueGray-50">
-<div class="w-full lg:w-8/12 px-4 mx-auto mt-6">
-  <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
-    <div class="rounded-t bg-white mb-0 px-6 py-6">
-      <div class="text-center flex justify-between">
-        <h6 class="text-blueGray-700 text-xl font-bold">
-          My Review
-        </h6>
-        
+      <div className="w-full lg:w-8/12 px-4">
+        <div className="bg-slate-300 shadow-lg rounded-lg p-6">
+          <div className="text-center mb-6">
+            <h2 className="text-3xl font-bold text-gray-800">Share Your Interview Experience</h2>
+            <p className="text-gray-600">Help others by contributing your valuable insights!</p>
+          </div>
+          <form>
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold text-gray-700 mb-4">User Information</h3>
+              <input
+                type="text"
+                className="w-full border rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Your Name"
+                name="name"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold text-gray-700 mb-4">Company Information</h3>
+              <input
+                type="text"
+                className="w-full border rounded-lg px-4 py-2 mb-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Company Name"
+                name="company"
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                className="w-full border rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Job Title"
+                name="jobTitle"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold text-gray-700 mb-4">Resume Screening</h3>
+              <div className="flex items-center space-x-4">
+                <label className="flex items-center text-gray-700">
+                  <input
+                    type="radio"
+                    className="form-radio text-indigo-600"
+                    value="Yes"
+                    name="resumeScreening"
+                    onChange={handleChange}
+                  />
+                  <span className="ml-2">Yes</span>
+                </label>
+                <label className="flex items-center text-gray-700">
+                  <input
+                    type="radio"
+                    className="form-radio text-indigo-600"
+                    value="No"
+                    name="resumeScreening"
+                    onChange={handleChange}
+                  />
+                  <span className="ml-2">No</span>
+                </label>
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold text-gray-700 mb-4">Interview Experience</h3>
+              {[...Array(4)].map((_, index) => (
+                <div key={index} className="mb-4">
+                  <input
+                    type="text"
+                    className="w-full border rounded-lg px-4 py-2 mb-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    placeholder={`Round ${index + 1} Name`}
+                    name={`round${index + 1}Name`}
+                    onChange={handleChange}
+                  />
+                  <textarea
+                    className="w-full border rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    rows="3"
+                    placeholder={`Details about Round ${index + 1}`}
+                    name={`round${index + 1}`}
+                    onChange={handleChange}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center">
+              <button
+                type="button"
+                onClick={handleClick}
+                className="bg-slate-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-    <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-      <form>
-        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          User Information
-        </h6>
-        <div class="flex flex-wrap">
-          
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Name
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name='name' onChange={handleChange} />
-            </div>
-          </div>
-          
-        </div>
+  );
+};
 
-        <hr class="mt-6 border-b-1 border-blueGray-300"/>
-
-        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          Company Information
-        </h6>
-        <div class="flex flex-wrap">
-          <div class="w-full lg:w-12/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Company Name
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name='company' onChange={handleChange} />
-            </div>
-          </div>
-          <div class="w-full lg:w-12/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Job Title
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name='jobTitle' onChange={handleChange} />
-            </div>
-          </div>
-        </div>
-
-        <hr class="mt-6 border-b-1 border-blueGray-300"/>
-
-        <div className='mt-6 border-b-1 border-blueGray-300'>
-        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          Was there resume screening round? 
-        </h6>
-        <div class="w-full lg:w-6/12 px-4">
-        <div class="border-0 mb-2 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-        <input type="radio" value="Yes" name="resumeScreening"  onChange={handleChange} /> Yes<br/>
-        </div>
-        <div class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-        <input type="radio"  value="No" name="resumeScreening"  onChange={handleChange} /> No<br/>
-        </div>
-        </div>
-        
-        </div>
-        <hr class="mt-6 border-b-1 border-blueGray-300"/>
-
-        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          Interview Experience
-        </h6>
-          <div class="w-full lg:w-12/12 px-4">
-        <div class="flex flex-wrap">
-            <div class="relative w-full mb-3">
-
-
-              
-            <div class="w-full lg:w-6/12">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                What was round 1?
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name='round1Name' onChange={handleChange}/>
-            </div>
-          </div>
-
-
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Round 1
-              </label>
-              <textarea type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" rows="4" name='round1' onChange={handleChange}> </textarea>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="flex flex-wrap">
-          <div class="w-full lg:w-12/12 px-4">
-            <div class="relative w-full mb-3">
-            <div class="w-full lg:w-6/12">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                What was round 2?
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name='round2Name' onChange={handleChange}/>
-            </div>
-          </div>
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Round 2
-              </label>
-              <textarea type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" rows="4" name='round2' onChange={handleChange}> </textarea>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex flex-wrap">
-          <div class="w-full lg:w-12/12 px-4">
-            <div class="relative w-full mb-3">
-            <div class="w-full lg:w-6/12">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                What was round 3?
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name='round3Name' onChange={handleChange}/>
-            </div>
-          </div>
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Round 3
-              </label>
-              <textarea type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" rows="4" name='round3' onChange={handleChange}> </textarea>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex flex-wrap">
-          <div class="w-full lg:w-12/12 px-4">
-            <div class="relative w-full mb-3">
-            <div class="w-full lg:w-6/12">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                What was round 4?
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name='round4Name' onChange={handleChange}/>
-            </div>
-          </div>
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Round 4
-              </label>
-              <textarea type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" rows="4" name='round4' onChange={handleChange}> </textarea>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-
-<button class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-4 float-right ease-linear transition-all duration-150" type="button" onClick={handleClick}>
-          SUBMIT
-        </button>
-       
-</div>
-</section>
-  )
-}
-
-export default Contribute
+export default Contribute;

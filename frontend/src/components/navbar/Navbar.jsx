@@ -1,28 +1,41 @@
-import React from 'react'
+import React from 'react';
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { DataContext } from '../../context/DataProvider';
 
 const Navbar = () => {
-    const {account}=useContext(DataContext);
+    const { account } = useContext(DataContext);
 
-  return (
-    <>
-        <div>
-            <div className="flex items-center justify-between h-16">
-                <div className="w-full justify-between flex items-center">
-                    <div className="hidden md:block">
-                        <div className="flex items-baseline ml-10 space-x-4">
-                            <button type="button" className="py-1 px-2  bg-pink-600 hover:bg-pink-700 focus:ring-pink-500 focus:ring-offset-pink-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
-                                <NavLink to='/contribute'>Contribute</NavLink>
-                            </button>
-                        </div>
+    return (
+        <>
+            <div className="bg-gray-800 text-white">
+                <div className="flex items-center justify-between h-16 px-4">
+                    <div className="text-lg font-bold">Interview Hub</div>
+                    <div className="flex space-x-4">
+                        <NavLink
+                            to="/"
+                            className={({ isActive }) =>
+                                `py-2 px-4 rounded-lg transition duration-200 ${isActive ? 'bg-pink-600' : 'hover:bg-pink-700'}`
+                            }
+                        >
+                            Home
+                        </NavLink>
+                        <NavLink
+                            to="/contribute"
+                            className={({ isActive }) =>
+                                `py-2 px-4 rounded-lg transition duration-200 ${isActive ? 'bg-pink-600' : 'hover:bg-pink-700'}`
+                            }
+                        >
+                            Contribute
+                        </NavLink>
                     </div>
+                    {account && (
+                        <div className="text-sm">Welcome, {account.name}</div>
+                    )}
                 </div>
             </div>
-        </div>
-    </>
-  )
-}
+        </>
+    );
+};
 
-export default Navbar
+export default Navbar;
