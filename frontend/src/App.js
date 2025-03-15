@@ -11,7 +11,6 @@ function App() {
       <BrowserRouter>
         <Navbar/>
         <Routes>
-          
           <Route path='/' element={<InterviewData/>}/> 
           <Route path='/contribute' element={<Contribution/>}/>
         </Routes>
